@@ -1,80 +1,183 @@
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f6f8;
+html, body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
   display: flex;
-  justify-content: center;
-  padding-top: 50px;
+  flex-direction: column;
+  font-family: 'DM Sans', sans-serif;
+  background-color: #f9fafb;
+  align-items: center;
 }
 
-.container {
-  background: white;
-  padding: 25px;
-  width: 400px;
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
-
-h1 {
-  text-align: center;
-}
-
-.task-input {
-  display: flex;
-  gap: 5px;
-  margin-bottom: 15px;
-}
-
-.task-input input {
-  flex: 1;
-  padding: 8px;
-}
-
-.task-input select,
-.task-input button {
-  padding: 8px;
-}
-
-ul {
-  list-style: none;
-  padding: 5px;
-}
-
-li {
+/* HEADER sticky */
+.header-container {
+  width: 100%;
+  padding: 16px 24px;
+  background-color: white;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px;
-  margin-bottom: 5px;
-  border-radius: 5px;
-  background-color: #f1f1f1;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
-.completed {
-  text-decoration: line-through;
-  opacity: 0.6;
+/* MAIN container qui prend tout le reste de la page */
+.main-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* centre verticalement */
+  align-items: center;     /* centre horizontalement */
+  gap: 16px;
+
+  min-height: 100vh;       /* prend toute la hauteur de la page */
+  padding: 16px;
+}
+/* =========================
+   FORM
+========================= */
+#add-task-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  
 }
 
-.priority-high {
-  border-left: 5px solid red;
+#add-task-form input,
+#add-task-form select,
+#add-task-form textarea {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 0.875rem;
 }
 
-.priority-medium {
-  border-left: 5px solid orange;
+/* =========================
+   LISTE DE TÂCHES
+========================= */
+#task-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-bottom: 16px;
 }
 
-.priority-low {
-  border-left: 5px solid green;
-}
-
-.filters {
+.task-item {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 10px;
+  align-items: first flex-start;
+  padding: 12px 16px;
+  background-color: white;
+  border-radius: 1rem;
+  border: 1px solid #f3f4f6;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  transition: all 0.2s ease;
+  flex-wrap: wrap;
 }
 
-.filters button {
+.task-text {
+  display: flex;
+  flex-direction: column;
   flex: 1;
-  margin: 0 2px;
-  padding: 5px;
-  cursor: pointer;
+  min-width: 0; /* permet au texte de wrap correctement */
+}
+
+/* titre + échéance sur la même ligne */
+.task-title-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px; /* espace entre titre et date */
+}
+
+.task-title {
+  font-weight: 500;
+  color: #1f2937;
+  font-size: 2rem;
+  flex-shrink: 1;
+  word-break: break-word;
+}
+
+.task-deadline {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: black;
+  padding: 2px 6px;
+  border-radius: 6px;
+  display: inline-block;
+}
+
+/* notes */
+.task-notes {
+  font-size: 0.875rem;
+  color: #4b5563;
+  white-space: pre-wrap;
+  margin-top: 4px;
+}
+
+/* priorité en haut à gauche du conteneur */
+.task-priority {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: white;
+  margin-bottom: 8px;
+}
+
+.task-priority.Low { background-color: #10b981; }     
+.task-priority.Medium { background-color: #f59e0b; }  
+.task-priority.High { background-color: #ef4444; }    
+
+/* actions */
+.task-actions {
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-left: 12px;
+}
+
+.task-actions i {
+  cursor:pointer;
+  font-size:14px;
+  color:#9ca3af;
+  transition:0.2s;
+}
+
+.task-actions i:hover {
+  color:#6b7280;
+  transform:scale(1.1);
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 640px) {
+  .task-item {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .task-actions {
+    margin-left: 0;
+    justify-content: flex-end;
+    margin-top: 8px;
+  }
+
+  .task-title-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .header-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
 }
